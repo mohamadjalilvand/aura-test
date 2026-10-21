@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AURA WORK — شیراز انرژی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#14263D;--blue:#2463A6;--teal:#278C87;--bg:#F5F7FA;--sf:#fff;--tx:#202D3B;--t2:#68778A;--bd:#DFE6EE;--ok:#27845A;--warn:#C98722;--err:#C44949}
+*{box-sizing:border-box}body{margin:0;font:14px/1.7 Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--tx);display:flex;min-height:100vh}
+#side{width:230px;background:var(--navy);color:#fff;padding:16px 10px;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.brand{font-weight:700;font-size:18px;padding:4px 10px}.brand small{display:block;font-size:11px;font-weight:400;opacity:.7}
+#nav{display:flex;flex-direction:column;gap:2px;flex:1}#nav a{color:#cfd9e6;padding:9px 12px;border-radius:6px;cursor:pointer}
+#nav a:hover{background:#1d3550}#nav a.on{background:var(--blue);color:#fff}
+#wrap{flex:1;min-width:0}header{display:flex;gap:10px;align-items:center;padding:10px 20px;background:var(--sf);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5}
+#gs{flex:1;max-width:380px}main{padding:20px;max-width:1300px}
+.btn{font:inherit;border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:6px 14px;border-radius:6px;cursor:pointer;min-height:36px}
+.btn.p{background:var(--blue);border-color:var(--blue);color:#fff}.btn.d{color:var(--err)}.btn.ghost{background:transparent;color:inherit}
+#side .btn{border-color:#35506f}.menu{display:none}
+input,select,textarea{font:inherit;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:#fff;color:var(--tx);min-height:36px;max-width:100%}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.sr{font-size:12px;color:var(--t2)}
+.tag{background:#e8f1f8;color:var(--blue);padding:2px 10px;border-radius:99px;font-size:12px;white-space:nowrap}
+h2{margin:0 0 4px}.bc{color:var(--t2);font-size:12px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px}
+.kpi{cursor:pointer}.kpi b{display:block;font-size:26px;color:var(--navy)}.kpi span{color:var(--t2)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tw{overflow-x:auto;background:var(--sf);border:1px solid var(--bd);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:640px}th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap}
+th{background:#eef2f7;color:var(--t2);font-weight:600}
+.b{padding:1px 9px;border-radius:99px;font-size:12px;background:#eef2f7;color:var(--t2)}.b.ok{background:#e3f3ea;color:var(--ok)}.b.w{background:#fbf0dc;color:var(--warn)}.b.e{background:#f8e4e4;color:var(--err)}.b.i{background:#e5eef8;color:var(--blue)}
+.pg{height:6px;background:var(--bd);border-radius:9px;min-width:70px}.pg i{display:block;height:100%;background:var(--teal);border-radius:9px}
+.kan{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:10px;overflow-x:auto}
+.col{background:#eaeff5;border-radius:8px;padding:8px}.col h4{margin:2px 4px 8px}.tk{background:#fff;border:1px solid var(--bd);border-radius:6px;padding:8px;margin-bottom:8px}
+.tk.od{border-right:3px solid var(--err)}.tk a{cursor:pointer;font-weight:600}.tk select{width:100%;margin-top:6px}
+dialog{border:0;border-radius:10px;padding:20px;width:min(560px,94vw);max-height:90vh;overflow:auto}dialog::backdrop{background:#14263d88}
+dialog label{display:block;margin-bottom:10px;color:var(--t2)}dialog input,dialog select,dialog textarea{display:block;width:100%;color:var(--tx)}
+.row{display:flex;gap:8px}.err{color:var(--err);min-height:20px;margin:0}
+#toast{position:fixed;bottom:16px;left:16px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;display:none;z-index:99}
+.empty{padding:30px;text-align:center;color:var(--t2)}ul.l{padding:0;margin:0;list-style:none}ul.l li{padding:6px 0;border-bottom:1px solid var(--bd)}a.lk{color:var(--blue);cursor:pointer}
+.msg{padding:10px;border-radius:8px;margin-bottom:8px;background:#fff;border:1px solid var(--bd)}.msg.q{background:#e5eef8}
+bdi{unicode-bidi:isolate;direction:ltr}canvas{max-height:260px}
+@media(max-width:800px){#side{position:fixed;inset:0 0 0 auto;transform:translateX(100%);z-index:20;transition:.2s}#side.open{transform:none}.menu{display:block}main{padding:12px}header{padding:8px 12px;flex-wrap:wrap}}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head><body>
+<aside id="side"><div class="brand">AURA WORK<small>شرکت مهندسی مشاور شیراز انرژی</small></div><nav id="nav"></nav>
+<button class="btn ghost" data-act="reset">بازنشانی داده‌های نمایشی</button></aside>
+<div id="wrap"><header>
+<button class="btn ghost menu" data-act="menu" aria-label="منو">☰</button>
+<input id="gs" type="search" placeholder="جست‌وجوی سراسری…" aria-label="جست‌وجوی سراسری">
+<span class="tag">داده‌های نمایشی</span>
+<label class="sr">نقش نمایشی<select id="role"></select></label>
+<button class="btn ghost" data-act="go" data-v="notes" aria-label="اعلان‌ها">🔔 <b id="bell"></b></button>
+</header><main id="main"></main></div>
+<dialog id="m"></dialog><div id="toast" role="status"></div><div id="fatal" style="display:none;direction:rtl;margin:20px;padding:16px;background:#fff0f0;border:1px solid #c44949;border-radius:8px;color:#7b2020"></div>
+<script>
+window.addEventListener("error", function(e){var f=document.getElementById("fatal"); if(f){f.style.display="block"; f.textContent="خطای اجرای برنامه: "+(e.message||"خطای نامشخص")+" — لطفاً Console مرورگر را بررسی کنید.";}});
+/* داده‌های نمایشی — کاملاً ساختگی. تاریخ‌ها نسبت به روز اولین اجرا ساخته و سپس ذخیره می‌شوند. */
+const DEPT_NAMES=['بخش تجدیدپذیر','بخش پست توزیع','بخش پست فوق توزیع','بخش کنترل پروژه','بخش مناقصات','بخش مالی'];
+const PS=['برنامه‌ریزی','در حال اجرا','در انتظار تأیید','متوقف‌شده','تکمیل‌شده','لغوشده'];
+const TS=['جدید','برنامه‌ریزی‌شده','در حال انجام','در انتظار بررسی','تکمیل‌شده','لغوشده'];
+const PR=['کم','متوسط','بالا','بحرانی'];
+const dateOffset=n=>{const t=new Date();t.setDate(t.getDate()+n);return t.toISOString().slice(0,10)};
+function seed(){
+ const desc=['مطالعات امکان‌سنجی و طراحی نیروگاه‌های خورشیدی','طراحی پست‌های توزیع و شبکه میان‌ولتاژ','طراحی پست‌های فوق توزیع و خطوط انتقال','برنامه‌ریزی، پایش پیشرفت و ریسک پروژه‌ها','ارزیابی فرصت‌ها و تهیه اسناد مناقصه','پیگیری بودجه، صورت‌حساب و پرداخت‌ها'];
+ const depts=DEPT_NAMES.map((n,i)=>({id:'d'+i,name:n,head:'p'+i,desc:desc[i]}));
+ const nm=['آرمان کیانی','سپیده نوروزی','کامران راد','مهسا فرهمند','پویا صالحی','نگار توکلی','داریوش منصوری','الهام جعفری','بابک رضوی','شیدا پارسا','یاسر امیری (میدانی)','ترانه کاشانی (پیمانکار)'];
+ const jt=['مدیر بخش','طراح ارشد','کارشناس طراحی','کارشناس برنامه‌ریزی','کارشناس مناقصه','کارشناس مالی'];
+ const people=nm.map((n,i)=>({id:'p'+i,name:n,dept:'d'+(i%6),title:i<6?'مدیر بخش':jt[1+i%5],role:i<6?'مدیر واحد':i<10?'کارشناس':'پیمانکار',type:i<10?'داخلی':'پیمانکار/میدانی',email:'demo'+i+'@example.test',active:true}));
+ const pt=['طراحی نیروگاه خورشیدی نمونه ۵ مگاوات','طراحی پست توزیع ناحیه صنعتی نمونه','طراحی پست ۶۳/۲۰ کیلوولت نمونه','پایش برنامه زمانی طرح‌های منطقه‌ای','ارزیابی فنی مناقصه شبکه هوشمند','بازنگری اسناد مالی طرح‌های نمونه'];
+ const stt=[1,1,2,1,0,1],bud=[900,650,1200,300,200,150];
+ const projects=pt.map((t,i)=>({id:'pr'+i,code:'SE-P-'+(101+i),title:t,desc:'پروژه نمایشی: '+t,dept:'d'+i,manager:'p'+i,status:PS[stt[i]],priority:PR[(i+1)%4],start:dateOffset(-90+i*5),due:dateOffset(20+i*25),budget:bud[i],spent:Math.round(bud[i]*[.55,.4,.7,.5,.2,.3][i])}));
+ const tt=['مطالعه تابش و پتانسیل سایت','تهیه نقشه تک‌خطی','بازبینی محاسبات بار','هماهنگی با تیم میدانی','تهیه فهرست مصالح','بررسی نقشه‌های اجرایی','برآورد منابع و زمان','تهیه گزارش پیشرفت','کنترل مدارک مناقصه','پیگیری صورت‌حساب'];
+ const st10=[2,4,2,3,4,1,0,4,2,4],off=[-12,-5,3,8,-2,15,21,-20,6,30,-8,12];
+ const tasks=[];for(let i=0;i<32;i++){const a=i%12,st=i===13?5:st10[i%10],due=dateOffset(off[i%12]);
+  const t={id:'t'+i,title:tt[i%10]+' ('+(i+1)+')',desc:'شرح نمایشی وظیفه.',project:'pr'+(i%6),dept:'d'+(a%6),assignee:'p'+a,creator:'p'+(i%6),priority:PR[i%4],status:TS[st],start:dateOffset(off[i%12]-14),due,est:8+(i%5)*8,dep:'',comments:[]};
+  if(st===4)t.done=i%5?due:dateOffset(off[i%12]+3);tasks.push(t)}
+ tasks[3].dep='t2';
+ const dn=['گزارش مطالعات اولیه','نقشه تک‌خطی','ضمانت‌نامه حسن انجام کار','مشخصات فنی تجهیزات','اسناد مناقصه','گزارش مالی فصلی','صورتجلسه هماهنگی','نقشه‌های اجرایی'];
+ const docs=dn.map((t,i)=>({id:'dc'+i,title:t+' — نمونه',cat:['گزارش','نقشه','ضمانت‌نامه','مشخصات','مناقصه','مالی','صورتجلسه','نقشه'][i],project:'pr'+(i%6),dept:'d'+(i%6),owner:'p'+(i%10),status:['تأییدشده','در انتظار تأیید','تأییدشده','پیش‌نویس','در انتظار تأیید','تأییدشده','پیش‌نویس','رد‌شده'][i],expiry:dateOffset([40,10,22,60,5,90,-3,30][i])}));
+ const contracts=[0,1,2,3,4].map(i=>({id:'ct'+i,ref:'CT-'+(201+i),title:'قرارداد نمونه '+(i+1),project:'pr'+i,dept:'d'+i,owner:'p'+i,status:['فعال','فعال','در انتظار امضا','فعال','پایان‌یافته'][i],start:dateOffset(-120+i*10),end:dateOffset(15+i*40),renew:dateOffset(5+i*30),note:'یادداشت نمایشی'}));
+ const opps=[0,1,2,3,4].map(i=>({id:'op'+i,ref:'TN-'+(301+i),title:['مطالعه خورشیدی منطقه‌ای','طراحی شبکه توزیع شهری','پست فوق توزیع نمونه','نظارت بر طرح میان‌ولتاژ','امکان‌سنجی ذخیره‌ساز'][i]+' (نمونه)',client:['شرکت نمونه آذر','سازمان نمونه جنوب','شرکت توزیع نمونه','سازمان نمونه شرق','شرکت نمونه کویر'][i],dept:'d4',owner:'p4',status:['شناسایی','آماده‌سازی اسناد','ارسال‌شده','برنده','شناسایی'][i],due:dateOffset([8,20,-5,45,12][i]),value:[400,800,1500,350,600][i],next:'پیگیری مرحله بعد'}));
+ const events=[0,1,2,3,4,5].map(i=>({id:'ev'+i,title:['جلسه هماهنگی هفتگی','بازبینی طراحی','نقطه‌عطف تحویل فاز ۱','جلسه ارزیابی مناقصه','هماهنگی تیم میدانی','بررسی بودجه'][i],date:dateOffset([1,3,7,2,9,5][i]),time:['09:00','10:30','08:00','14:00','11:00','13:00'][i],type:['جلسه','بازبینی','نقطه‌عطف','جلسه','هماهنگی','جلسه'][i],project:'pr'+i,dept:'d'+i}));
+ return{depts,people,projects,tasks,docs,contracts,opps,events,log:[{t:Date.now(),m:'داده‌های نمایشی بارگذاری شد'}]};
+}
+
+</script>
+<script>
+/* AURA WORK — معماری: state(S) + selectors + R(پیکربندی CRUD عمومی) + V(نماها) + رویدادهای واگذارشده */
+const KEY='aura-work-v1',$=s=>document.querySelector(s);
+const load=()=>{try{const j=JSON.parse(localStorage.getItem(KEY));const required=['depts','people','projects','tasks','docs','contracts','opps','events','log'];if(j&&j.v===1&&j.d&&required.every(k=>Array.isArray(j.d[k]))&&j.d.depts.length&&j.d.people.length&&j.d.projects.length&&j.d.tasks.length)return{...j,role:ROLES_SAFE(j.role),read:Array.isArray(j.read)?j.read:[]}}catch(e){console.warn('AURA WORK: stored demo data is invalid; resetting.',e)}return{v:1,d:seed(),role:'senior',read:[]}};
+function ROLES_SAFE(r){return ['senior','manager','expert','contractor'].includes(r)?r:'senior'}
+let S=load(),U={v:'dash',f:{},tv:'board',chat:[],sort:'due'};const CH=[];
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('ذخیره‌سازی محلی ممکن نشد')}};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fa=n=>Number(n).toLocaleString('fa-IR'),dt=d=>d?new Date(d+'T00:00').toLocaleDateString('fa-IR-u-ca-persian'):'—';
+const today=()=>new Date().toISOString().slice(0,10),by=(k,id)=>S.d[k].find(x=>x.id===id),nm=(k,id,f='name')=>(by(k,id)||{})[f]||'—';
+const log=m=>{S.d.log.unshift({t:Date.now(),m});S.d.log.length=Math.min(S.d.log.length,30)};
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2600)}
+const ROLES={senior:'مدیرعامل / مدیریت ارشد',manager:'مدیر واحد',expert:'کارشناس',contractor:'نیروی پیمانکاری'};
+const me=()=>by('people',{manager:'p0',expert:'p6',contractor:'p10'}[S.role]);
+/* دسترسی نمایشی (نه امنیت واقعی) */
+const vt=()=>S.d.tasks.filter(t=>S.role==='senior'||(S.role==='manager'&&t.dept===me().dept)||(S.role!=='manager'&&S.role!=='senior'&&t.assignee===me().id));
+const vp=()=>{const ids=new Set(vt().map(t=>t.project));return S.d.projects.filter(p=>S.role==='senior'||(S.role==='manager'?p.dept===me().dept||ids.has(p.id):ids.has(p.id)))};
+const fin=t=>t.status==='تکمیل‌شده'||t.status==='لغوشده',od=t=>t.due<today()&&!fin(t);
+const prog=p=>{const a=S.d.tasks.filter(t=>t.project===p.id&&t.status!=='لغوشده');return a.length?Math.round(100*a.filter(t=>t.status==='تکمیل‌شده').length/a.length):0};
+const atRisk=p=>p.status==='در حال اجرا'&&(S.d.tasks.some(t=>t.project===p.id&&od(t))||(p.due<D(14)&&prog(p)<60));
+function D(n){const t=new Date();t.setDate(t.getDate()+n);return t.toISOString().slice(0,10)}
+/* گزینه‌ها */
+const O={dept:()=>S.d.depts.map(d=>[d.id,d.name]),per:()=>S.d.people.map(p=>[p.id,p.name]),proj:()=>S.d.projects.map(p=>[p.id,p.code+' '+p.title]),tsk:()=>[['','—'],...S.d.tasks.map(t=>[t.id,t.title])],s:a=>()=>a.map(x=>[x,x])};
+const F=(n,l,t='text',o,opt)=>[n,l,t,o,opt];
+const dr=[F('title','عنوان'),F('dept','بخش','select',O.dept),F('project','پروژه','select',O.proj)];
+const R={
+ projects:{s:'پروژه',t:'پروژه‌ها',f:[F('code','کد پروژه'),F('title','عنوان'),F('desc','توضیحات','area',0,1),F('dept','بخش','select',O.dept),F('manager','مدیر پروژه','select',O.per),F('status','وضعیت','select',O.s(PS)),F('priority','اولویت','select',O.s(PR)),F('start','شروع','date'),F('due','موعد','date'),F('budget','بودجه (میلیون ریال، نمایشی)','number'),F('spent','هزینه ثبت‌شده','number')],cols:['code','title','dept','manager','status','priority','due'],def:{},val:o=>o.due<o.start?'موعد پیش از شروع است.':''},
+ tasks:{s:'وظیفه',t:'وظایف',f:[F('title','عنوان'),F('desc','شرح','area',0,1),F('project','پروژه','select',O.proj),F('dept','بخش','select',O.dept),F('assignee','مسئول','select',O.per),F('priority','اولویت','select',O.s(PR)),F('status','وضعیت','select',O.s(TS)),F('start','شروع','date'),F('due','موعد','date'),F('est','برآورد (ساعت)','number'),F('dep','پیش‌نیاز','select',O.tsk,1)],cols:['title','project','assignee','priority','status','due'],def:{creator:'p0',comments:[]},
+  val:(o,id)=>{if(o.due<o.start)return'موعد پیش از شروع است.';const d=o.dep&&by('tasks',o.dep);if(d&&d.id===id)return'پیش‌نیاز نمی‌تواند خودِ وظیفه باشد.';if(d&&!fin(d)&&['در حال انجام','در انتظار بررسی','تکمیل‌شده'].includes(o.status))return'پیش‌نیاز «'+d.title+'» هنوز تکمیل نشده است.';return''}},
+ people:{s:'کارمند',t:'تیم‌ها و کارکنان',f:[F('name','نام'),F('dept','بخش','select',O.dept),F('title','عنوان شغلی'),F('role','نقش','select',O.s(['مدیر واحد','کارشناس','پیمانکار'])),F('type','دسته','select',O.s(['داخلی','پیمانکار/میدانی'])),F('email','ایمیل نمونه','email')],cols:['name','dept','title','role','type'],def:{active:true},val:o=>/@example\.test$/.test(o.email)?'':'ایمیل نمونه باید به example.test ختم شود.'},
+ depts:{s:'بخش',t:'ساختار سازمانی',f:[F('head','مسئول بخش','select',O.per),F('desc','توضیحات','area')],cols:[],def:{}},
+ docs:{s:'سند',t:'اسناد و تأییدها',f:[...dr,F('cat','دسته'),F('owner','مسئول','select',O.per),F('status','مرحله تأیید','select',O.s(['پیش‌نویس','در انتظار تأیید','تأییدشده','رد‌شده'])),F('expiry','موعد بازبینی/انقضا','date')],cols:['title','cat','project','dept','owner','status','expiry'],def:{}},
+ contracts:{s:'قرارداد',t:'قراردادها و پیگیری‌ها',f:[F('ref','شماره'),...dr,F('owner','مسئول','select',O.per),F('status','وضعیت','select',O.s(['در انتظار امضا','فعال','پایان‌یافته','لغوشده'])),F('start','شروع','date'),F('end','پایان','date'),F('renew','موعد تمدید','date'),F('note','یادداشت','area',0,1)],cols:['ref','title','project','dept','owner','status','end','renew'],def:{},val:o=>o.end<o.start?'پایان پیش از شروع است.':''},
+ opps:{s:'فرصت',t:'مناقصات و فرصت‌ها',f:[F('ref','کد'),F('title','عنوان'),F('client','کارفرما'),F('dept','بخش','select',O.dept),F('owner','مسئول','select',O.per),F('status','وضعیت','select',O.s(['شناسایی','آماده‌سازی اسناد','ارسال‌شده','برنده','بازنده','لغوشده'])),F('due','مهلت','date'),F('value','ارزش برآوردی','number'),F('next','اقدام بعدی')],cols:['ref','title','client','owner','status','due','value'],def:{}},
+ events:{s:'رویداد',t:'تقویم و زمان‌بندی',f:[F('title','عنوان'),F('date','تاریخ','date'),F('time','ساعت','time'),F('type','نوع','select',O.s(['جلسه','بازبینی','نقطه‌عطف','هماهنگی','موعد'])),F('project','پروژه','select',O.proj),F('dept','بخش','select',O.dept)],cols:['date','time','title','type','project','dept'],def:{}}
+};
+const LBL={code:'کد',title:'عنوان',dept:'بخش',manager:'مدیر',status:'وضعیت',priority:'اولویت',due:'موعد',project:'پروژه',assignee:'مسئول',name:'نام',role:'نقش',type:'نوع',email:'ایمیل',cat:'دسته',owner:'مسئول',expiry:'موعد بازبینی',ref:'شماره',end:'پایان',renew:'تمدید',client:'کارفرما',value:'ارزش',date:'تاریخ',time:'ساعت'};
+function cell(k,f,it){const v=it[f];const m={dept:'depts',manager:'people',assignee:'people',owner:'people',project:'projects',head:'people'}[f];
+ if(m)return esc(nm(m,v,m==='projects'?'title':m==='depts'?'name':'name'));
+ if(/date|due|end|renew|expiry/.test(f)&&/^\d{4}/.test(v))return dt(v)+(['due','expiry','renew'].includes(f)&&v<today()&&!(k==='tasks'&&fin(it))?' <span class="b e">گذشته</span>':'');
+ if(f==='status'||f==='priority'){const c=/تکمیل|تأییدشده|فعال|برنده/.test(v)?'ok':/متوقف|رد|لغو|بحرانی|بازنده/.test(v)?'e':/انتظار|بالا/.test(v)?'w':'i';return`<span class="b ${c}">${esc(v)}</span>`}
+ if(f==='code'||f==='ref')return`<bdi>${esc(v)}</bdi>`;if(f==='value')return fa(v)+' م.ریال';return esc(v)}
+function apply(a,f){return a.filter(x=>Object.entries(f).every(([k,v])=>!v||(k==='q'?JSON.stringify(Object.values(x)).includes(v):k==='overdue'?od(x):k==='atrisk'?atRisk(x):x[k]===v)))}
+function table(k,items,extra=[]){const c=R[k];if(!items.length)return'<div class="card empty">موردی یافت نشد. فیلترها را تغییر دهید یا رکورد جدید بسازید.</div>';
+ return`<div class="tw"><table><thead><tr>${c.cols.map(f=>`<th>${LBL[f]}</th>`).join('')}${extra.map(e=>`<th>${e[0]}</th>`).join('')}<th>عملیات</th></tr></thead><tbody>${items.map(it=>`<tr>${c.cols.map(f=>`<td>${cell(k,f,it)}</td>`).join('')}${extra.map(e=>`<td>${e[1](it)}</td>`).join('')}<td><button class="btn" data-act="edit" data-k="${k}" data-id="${it.id}">ویرایش</button> <button class="btn d" data-act="del" data-k="${k}" data-id="${it.id}">حذف</button></td></tr>`).join('')}</tbody></table></div>`}
+const sel=(key,opts,all)=>`<select data-f="${key}" aria-label="${all}"><option value="">${all}</option>${opts.map(([a,b])=>`<option value="${esc(a)}"${U.f[key]===a?' selected':''}>${esc(b)}</option>`).join('')}</select>`;
+const q=()=>`<input data-f="q" type="search" placeholder="جست‌وجو…" value="${esc(U.f.q||'')}">`;
+const head=(t,btn)=>`<div class="bc">AURA WORK / ${t}</div><div class="bar"><h2>${t}</h2><span style="flex:1"></span>${btn||''}</div>`;
+const add=k=>`<button class="btn p" data-act="new" data-k="${k}">ایجاد ${R[k].s}</button>`;
+/* ----- نماها ----- */
+const V={
+dash(){const T=vt().filter(t=>!U.f.dept||t.dept===U.f.dept),P=vp().filter(p=>!U.f.dept||p.dept===U.f.dept),from=U.f.from||'0000';
+ const k=[['پروژه‌های فعال',P.filter(p=>p.status==='در حال اجرا').length,'projects','status','در حال اجرا'],['پروژه‌های در معرض ریسک',P.filter(atRisk).length,'projects','atrisk','1'],['وظایف باز',T.filter(t=>!fin(t)).length,'tasks','',''],['وظایف عقب‌افتاده',T.filter(od).length,'tasks','overdue','1'],['تکمیل‌شده در بازه',T.filter(t=>t.done>=from).length,'tasks','status','تکمیل‌شده']];
+ const att=T.filter(od).sort((a,b)=>a.due.localeCompare(b.due)).slice(0,6),up=T.filter(t=>!fin(t)&&t.due>=today()&&t.due<=D(14)).sort((a,b)=>a.due.localeCompare(b.due)).slice(0,6),ev=S.d.events.filter(e=>e.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
+ return head('داشبورد مدیریتی — '+ROLES[S.role])+`<div class="bar">${sel('dept',O.dept(),'همه بخش‌ها')}<label class="sr">تکمیل‌شده از <input type="date" data-f="from" value="${U.f.from||''}"></label></div>
+ <div class="grid">${k.map(x=>`<div class="card kpi" tabindex="0" data-act="go" data-v="${x[2]}" data-fk="${x[3]}" data-fv="${x[4]}"><b>${fa(x[1])}</b><span>${x[0]}</span></div>`).join('')}</div>
+ <div class="grid g2"><div class="card"><b>وظایف باز و تکمیل‌شده به تفکیک بخش</b><canvas id="c1"></canvas></div><div class="card"><b>توزیع وضعیت وظایف</b><canvas id="c2"></canvas></div></div>
+ <div class="grid g2"><div class="card"><b>نیازمند توجه مدیریت</b><ul class="l">${att.map(t=>`<li><a class="lk" data-act="edit" data-k="tasks" data-id="${t.id}">${esc(t.title)}</a> — ${dt(t.due)}</li>`).join('')||'<li class="empty">موردی نیست.</li>'}</ul></div>
+ <div class="card"><b>موعدهای پیش‌رو و جلسات</b><ul class="l">${up.map(t=>`<li><a class="lk" data-act="edit" data-k="tasks" data-id="${t.id}">${esc(t.title)}</a> — ${dt(t.due)}</li>`).join('')}${ev.map(e=>`<li><a class="lk" data-act="edit" data-k="events" data-id="${e.id}">📅 ${esc(e.title)}</a> — ${dt(e.date)}</li>`).join('')}</ul></div>
+ <div class="card"><b>فعالیت‌های اخیر</b><ul class="l">${S.d.log.slice(0,8).map(l=>`<li>${esc(l.m)} <small class="sr">${new Date(l.t).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}</small></li>`).join('')}</ul></div></div>`},
+orgs(){return head('ساختار سازمانی')+`<div class="bar">${q()}</div><div class="grid g2">${apply(S.d.depts,{q:U.f.q}).map(d=>{const pe=S.d.people.filter(p=>p.dept===d.id),ts=S.d.tasks.filter(t=>t.dept===d.id);return`<div class="card"><b>${esc(d.name)}</b><p class="sr">${esc(d.desc)}</p><p>مسئول: ${esc(nm('people',d.head))}<br>کارکنان: ${fa(pe.length)} · پروژه‌های فعال: ${fa(S.d.projects.filter(p=>p.dept===d.id&&p.status==='در حال اجرا').length)} · وظایف باز: ${fa(ts.filter(t=>!fin(t)).length)} · عقب‌افتاده: ${fa(ts.filter(od).length)}</p><div class="pg"><i style="width:${ts.length?Math.round(100*ts.filter(t=>t.status==='تکمیل‌شده').length/ts.length):0}%"></i></div><p class="sr">${esc(pe.map(p=>p.name).join('، '))}</p><button class="btn" data-act="edit" data-k="depts" data-id="${d.id}">ویرایش</button> <button class="btn" data-act="go" data-v="tasks" data-fk="dept" data-fv="${d.id}">وظایف بخش</button></div>`}).join('')||'<div class="empty">بخشی یافت نشد.</div>'}</div>`},
+people(){let a=apply(S.d.people,{q:U.f.q,dept:U.f.dept,role:U.f.role,type:U.f.type}).sort((x,y)=>x.name.localeCompare(y.name,'fa'));
+ return head('تیم‌ها و کارکنان',add('people'))+`<div class="bar">${q()}${sel('dept',O.dept(),'همه بخش‌ها')}${sel('role',['مدیر واحد','کارشناس','پیمانکار'].map(x=>[x,x]),'همه نقش‌ها')}${sel('type',['داخلی','پیمانکار/میدانی'].map(x=>[x,x]),'همه دسته‌ها')}</div>`+table('people',a,[['بار کاری (وظایف باز)',p=>fa(S.d.tasks.filter(t=>t.assignee===p.id&&!fin(t)).length)],['وضعیت',p=>`<button class="btn" data-act="tog" data-id="${p.id}">${p.active?'فعال':'غیرفعال'}</button>`]])},
+projects(){const a=apply(vp(),{q:U.f.q,dept:U.f.dept,status:U.f.status,atrisk:U.f.atrisk});
+ return head('مدیریت پروژه‌ها',S.role==='senior'||S.role==='manager'?add('projects'):'')+`<div class="bar">${q()}${sel('dept',O.dept(),'همه بخش‌ها')}${sel('status',PS.map(x=>[x,x]),'همه وضعیت‌ها')}</div>`+table('projects',a,[['پیشرفت (از وظایف)',p=>`<div class="pg"><i style="width:${prog(p)}%"></i></div>${fa(prog(p))}٪`+(atRisk(p)?' <span class="b e">ریسک</span>':'')],['وظایف',p=>`<button class="btn" data-act="go" data-v="tasks" data-fk="project" data-fv="${p.id}">${fa(S.d.tasks.filter(t=>t.project===p.id).length)} وظیفه</button>`]])},
+tasks(){let a=apply(vt(),{q:U.f.q,dept:U.f.dept,project:U.f.project,assignee:U.f.assignee,priority:U.f.priority,status:U.f.status,overdue:U.f.overdue});
+ a.sort((x,y)=>U.sort==='prio'?PR.indexOf(y.priority)-PR.indexOf(x.priority):x.due.localeCompare(y.due));
+ const bar=`<div class="bar">${q()}${sel('dept',O.dept(),'همه بخش‌ها')}${sel('project',O.proj(),'همه پروژه‌ها')}${sel('assignee',O.per(),'همه افراد')}${sel('priority',PR.map(x=>[x,x]),'همه اولویت‌ها')}${sel('status',TS.map(x=>[x,x]),'همه وضعیت‌ها')}<select data-sort aria-label="مرتب‌سازی"><option value="due">مرتب‌سازی: موعد</option><option value="prio"${U.sort==='prio'?' selected':''}>مرتب‌سازی: اولویت</option></select><button class="btn" data-act="tv">نمای ${U.tv==='board'?'جدول':'کانبان'}</button>${U.f.overdue?'<span class="tag">فقط عقب‌افتاده‌ها</span>':''}</div>`;
+ const stSel=t=>`<select data-st="${t.id}" aria-label="وضعیت">${TS.map(s=>`<option${s===t.status?' selected':''}>${s}</option>`).join('')}</select>`;
+ if(!a.length)return head('وظایف و گردش کار',add('tasks'))+bar+'<div class="card empty">وظیفه‌ای با این فیلترها نیست.</div>';
+ return head('وظایف و گردش کار',add('tasks'))+bar+(U.tv==='board'?`<div class="kan">${TS.map(s=>`<div class="col"><h4>${s} (${fa(a.filter(t=>t.status===s).length)})</h4>${a.filter(t=>t.status===s).map(t=>`<div class="tk${od(t)?' od':''}"><a data-act="edit" data-k="tasks" data-id="${t.id}">${esc(t.title)}</a><div class="sr">${esc(nm('people',t.assignee))} · ${dt(t.due)} ${cell('tasks','priority',t)}</div>${stSel(t)}</div>`).join('')}</div>`).join('')}</div>`:table('tasks',a,[['تغییر وضعیت',stSel]]))},
+docs:()=>reg('docs'),contracts:()=>reg('contracts'),opps:()=>reg('opps'),
+events(){const a=apply(S.d.events,{q:U.f.q,dept:U.f.dept,type:U.f.type}).sort((x,y)=>x.date.localeCompare(y.date));return head('تقویم و زمان‌بندی (نمای فهرست)',add('events'))+`<div class="bar">${q()}${sel('dept',O.dept(),'همه بخش‌ها')}${sel('type',['جلسه','بازبینی','نقطه‌عطف','هماهنگی','موعد'].map(x=>[x,x]),'همه انواع')}</div>`+table('events',a)},
+kpi(){const T=vt().filter(t=>(!U.f.dept||t.dept===U.f.dept)&&(!U.f.project||t.project===U.f.project)&&(!U.f.assignee||t.assignee===U.f.assignee)&&(!U.f.from||t.due>=U.f.from)),dn=T.filter(t=>t.status==='تکمیل‌شده'),pc=(a,b)=>b?fa(Math.round(100*a/b))+'٪':'—';
+ const m=[['نرخ تکمیل',pc(dn.length,T.filter(t=>t.status!=='لغوشده').length),'تکمیل‌شده ÷ همه وظایف غیرلغو'],['تکمیل به‌موقع',pc(dn.filter(t=>t.done<=t.due).length,dn.length),'تکمیل‌شده با تاریخ ≤ موعد ÷ تکمیل‌شده‌ها'],['وظایف عقب‌افتاده',fa(T.filter(od).length),'باز و گذشته از موعد'],['پروژه‌های تکمیل‌شده',pc(vp().filter(p=>p.status==='تکمیل‌شده').length,vp().length),'نسبت پروژه‌ها']];
+ return head('عملکرد و شاخص‌ها')+`<div class="bar">${sel('dept',O.dept(),'همه بخش‌ها')}${sel('project',O.proj(),'همه پروژه‌ها')}${sel('assignee',O.per(),'همه افراد')}<label class="sr">موعد از <input type="date" data-f="from" value="${U.f.from||''}"></label></div><div class="grid">${m.map(x=>`<div class="card" title="${x[2]}"><b style="font-size:24px">${x[1]}</b>${x[0]}<div class="sr">${x[2]}</div></div>`).join('')}</div>
+ <p class="sr">توجه: این شاخص‌ها فقط بر پایه شمار و موعد وظایف‌اند و کیفیت یا بهره‌وری افراد را نشان نمی‌دهند.</p>
+ <div class="tw"><table><thead><tr><th>بخش</th><th>باز</th><th>تکمیل‌شده</th><th>عقب‌افتاده</th></tr></thead><tbody>${S.d.depts.map(d=>{const x=T.filter(t=>t.dept===d.id);return`<tr><td>${esc(d.name)}</td><td>${fa(x.filter(t=>!fin(t)).length)}</td><td>${fa(x.filter(t=>t.status==='تکمیل‌شده').length)}</td><td>${fa(x.filter(od).length)}</td></tr>`}).join('')}</tbody></table></div>
+ <h3>بار کاری افراد (وظایف باز)</h3><div class="card">${S.d.people.map(p=>[p,T.filter(t=>t.assignee===p.id&&!fin(t)).length]).filter(x=>x[1]).map(([p,n])=>`<div>${esc(p.name)} <div class="pg"><i style="width:${Math.min(100,n*20)}%"></i></div> ${fa(n)}</div>`).join('')||'<div class="empty">داده‌ای نیست.</div>'}</div>`},
+fin(){const P=vp(),b=P.reduce((s,p)=>s+p.budget,0),s=P.reduce((s,p)=>s+p.spent,0);
+ return head('نمای مالی مدیریتی (ارقام نمایشی)')+`<div class="grid"><div class="card"><b>${fa(b)}</b>جمع بودجه (میلیون ریال)</div><div class="card"><b>${fa(s)}</b>جمع هزینه ثبت‌شده</div><div class="card"><b>${b?fa(Math.round(100*s/b)):'—'}٪</b>نسبت هزینه به بودجه</div></div><div class="tw"><table><thead><tr><th>پروژه</th><th>بودجه</th><th>هزینه</th><th>مصرف</th><th></th></tr></thead><tbody>${P.map(p=>`<tr><td>${esc(p.title)}</td><td>${fa(p.budget)}</td><td>${fa(p.spent)}</td><td><div class="pg"><i style="width:${Math.min(100,100*p.spent/p.budget)}%"></i></div></td><td><button class="btn" data-act="edit" data-k="projects" data-id="${p.id}">ویرایش</button></td></tr>`).join('')}</tbody></table></div><h3>پیگیری موعدهای قراردادی</h3>`+table('contracts',S.d.contracts)},
+notes(){const n=notes();return head('اعلان‌ها و فعالیت‌ها',`<button class="btn" data-act="readall">علامت‌گذاری همه به‌عنوان خوانده‌شده</button> <button class="btn" data-act="unr">${U.unread?'نمایش همه':'فقط خوانده‌نشده'}</button>`)+(n.filter(x=>!U.unread||!S.read.includes(x.id)).map(x=>`<div class="msg"${S.read.includes(x.id)?' style="opacity:.6"':''}>${x.t} <a class="lk" data-act="note" data-id="${x.id}" data-k="${x.k}" data-r="${x.r}">باز کردن</a></div>`).join('')||'<div class="card empty">اعلان جدیدی نیست.</div>')},
+ai(){const sg=['کدام پروژه‌ها در معرض تأخیر هستند؟','وظایف عقب‌افتاده کدام بخش‌ها بیشتر است؟','این هفته چه موعدهای مهمی داریم؟','بار کاری تیم‌ها چگونه توزیع شده است؟','کدام اسناد نمونه به موعد بازبینی نزدیک‌اند؟'];
+ return head('دستیار نمایشی AURA')+`<p class="tag">پاسخ‌ها قاعده‌محور و محلی‌اند؛ هیچ مدل هوش مصنوعی یا سرویس بیرونی متصل نیست.</p><div class="bar" style="margin-top:10px">${sg.map(s=>`<button class="btn" data-act="ask" data-q="${s}">${s}</button>`).join('')}</div><div class="bar"><input id="aq" placeholder="سؤال خود را بنویسید…" style="flex:1"><button class="btn p" data-act="askin">بپرس</button></div>${U.chat.map(c=>`<div class="msg q">${esc(c.q)}</div><div class="msg">${c.a}</div>`).join('')}`},
+search(){const s=U.s||'';if(!s)return head('جست‌وجو')+'<div class="card empty">عبارتی را در نوار بالا بنویسید.</div>';
+ const g=[['projects','پروژه‌ها','title'],['tasks','وظایف','title'],['people','کارکنان','name'],['depts','بخش‌ها','name'],['docs','اسناد','title'],['contracts','قراردادها','title'],['opps','فرصت‌ها','title'],['events','رویدادها','title']].map(([k,l,f])=>[k,l,f,S.d[k].filter(x=>JSON.stringify(Object.values(x)).includes(s))]).filter(x=>x[3].length);
+ return head('نتایج جست‌وجو: '+esc(s))+(g.map(([k,l,f,a])=>`<div class="card" style="margin-bottom:10px"><b>${l}</b><ul class="l">${a.map(x=>`<li><a class="lk" data-act="edit" data-k="${k}" data-id="${x.id}">${esc(x[f])}</a></li>`).join('')}</ul></div>`).join('')||'<div class="card empty">نتیجه‌ای یافت نشد.</div>')}
+};
+function reg(k){const c=R[k],a=apply(S.d[k],{q:U.f.q,dept:U.f.dept,status:U.f.status});return head(c.t,add(k))+`<div class="bar">${q()}${sel('dept',O.dept(),'همه بخش‌ها')}${sel('status',[...new Set(S.d[k].map(x=>x.status))].map(x=>[x,x]),'همه وضعیت‌ها')}</div>`+table(k,a)}
+/* اعلان‌های مشتق‌شده از وضعیت */
+function notes(){const n=[],t0=today(),w=D(30);vt().filter(od).forEach(t=>n.push({id:'od'+t.id,t:'⚠ وظیفه عقب‌افتاده: '+esc(t.title),k:'tasks',r:t.id}));
+ S.d.docs.filter(d=>d.expiry<=w).forEach(d=>n.push({id:'dx'+d.id+d.expiry,t:'📄 موعد بازبینی/انقضا نزدیک است: '+esc(d.title),k:'docs',r:d.id}));
+ S.d.contracts.filter(c=>c.renew<=w&&c.status==='فعال').forEach(c=>n.push({id:'cx'+c.id+c.renew,t:'📑 موعد تمدید: '+esc(c.title),k:'contracts',r:c.id}));
+ S.d.opps.filter(o=>o.due<=D(14)&&o.due>=t0&&!['برنده','بازنده','لغوشده'].includes(o.status)).forEach(o=>n.push({id:'ox'+o.id+o.due,t:'⏰ مهلت مناقصه: '+esc(o.title),k:'opps',r:o.id}));return n}
+/* دستیار */
+function answer(s){const T=vt(),ln=(k,x,l)=>`<a class="lk" data-act="edit" data-k="${k}" data-id="${x.id}">${esc(l)}</a>`;let r;
+ if(/پروژه/.test(s)){const a=vp().filter(atRisk);r=a.length?`${fa(a.length)} پروژه در معرض تأخیر (دارای وظیفه عقب‌افتاده یا موعد نزدیک با پیشرفت کم):<ul>${a.map(p=>`<li>${ln('projects',p,p.title)} — پیشرفت ${fa(prog(p))}٪، ${fa(T.filter(t=>t.project===p.id&&od(t)).length)} وظیفه عقب‌افتاده</li>`).join('')}</ul>`:'در داده‌های فعلی پروژه‌ای با این معیار یافت نشد.'}
+ else if(/عقب/.test(s)){const a=S.d.depts.map(d=>[d,T.filter(t=>t.dept===d.id&&od(t))]).filter(x=>x[1].length).sort((x,y)=>y[1].length-x[1].length);r=a.length?'<ul>'+a.map(([d,t])=>`<li>${esc(d.name)}: ${fa(t.length)} وظیفه — ${t.slice(0,3).map(x=>ln('tasks',x,x.title)).join('، ')}</li>`).join('')+'</ul>':'وظیفه عقب‌افتاده‌ای وجود ندارد.'}
+ else if(/هفته|موعد/.test(s)){const a=T.filter(t=>!fin(t)&&t.due>=today()&&t.due<=D(7)),e=S.d.events.filter(x=>x.date>=today()&&x.date<=D(7));r=a.length+e.length?'<ul>'+a.map(t=>`<li>${ln('tasks',t,t.title)} — ${dt(t.due)}</li>`).join('')+e.map(x=>`<li>${ln('events',x,'📅 '+x.title)} — ${dt(x.date)}</li>`).join('')+'</ul>':'موعدی در ۷ روز آینده ثبت نشده است.'}
+ else if(/بار/.test(s))r='<ul>'+S.d.depts.map(d=>`<li>${esc(d.name)}: ${fa(T.filter(t=>t.dept===d.id&&!fin(t)).length)} وظیفه باز</li>`).join('')+'</ul>';
+ else if(/سند/.test(s)){const a=S.d.docs.filter(d=>d.expiry<=D(30)).sort((x,y)=>x.expiry.localeCompare(y.expiry));r=a.length?'<ul>'+a.map(d=>`<li>${ln('docs',d,d.title)} — ${dt(d.expiry)}</li>`).join('')+'</ul>':'سندی در ۳۰ روز آینده به موعد نمی‌رسد.'}
+ else r='این دستیار فقط پنج الگوی از پیش‌تعریف‌شده (پروژه‌های پرریسک، وظایف عقب‌افتاده، موعدهای هفته، بار کاری، اسناد نزدیک به موعد) را پاسخ می‌دهد و برای سایر پرسش‌ها داده‌ای در اختیار ندارد.';
+ U.chat.push({q:s,a:r+(/پروژه|عقب/.test(s)?'<br><small>پیشنهاد: وظایف عقب‌افتاده را بازتخصیص دهید یا موعد را بازبینی کنید.</small>':'')})}
+/* ----- رندر ----- */
+function charts(){CH.splice(0).forEach(c=>c.destroy());if(U.v!=='dash'||typeof Chart==='undefined'||!$('#c1'))return;
+ const T=vt().filter(t=>!U.f.dept||t.dept===U.f.dept);CH.push(new Chart($('#c1'),{type:'bar',data:{labels:S.d.depts.map(d=>d.name.replace('بخش ','')),datasets:[{label:'باز',data:S.d.depts.map(d=>T.filter(t=>t.dept===d.id&&!fin(t)).length),backgroundColor:'#2463A6'},{label:'تکمیل‌شده',data:S.d.depts.map(d=>T.filter(t=>t.dept===d.id&&t.status==='تکمیل‌شده').length),backgroundColor:'#278C87'}]},options:{plugins:{legend:{rtl:true}},scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}}}));
+ CH.push(new Chart($('#c2'),{type:'doughnut',data:{labels:TS,datasets:[{data:TS.map(s=>T.filter(t=>t.status===s).length),backgroundColor:['#9aa8b8','#2463A6','#278C87','#C98722','#27845A','#C44949']}]},options:{plugins:{legend:{rtl:true}}}}))}
+const NAV=[['dash','داشبورد','smec'],['orgs','ساختار سازمانی','sm'],['people','تیم‌ها و کارکنان','sm'],['projects','پروژه‌ها','sme'],['tasks','وظایف','smec'],['events','تقویم','sme'],['kpi','عملکرد و شاخص‌ها','sm'],['docs','اسناد','sm'],['contracts','قراردادها','s'],['fin','نمای مالی','s'],['opps','مناقصات','sm'],['notes','اعلان‌ها','smec'],['ai','دستیار نمایشی','sm']];
+function render(){const ok=NAV.filter(n=>n[2].includes(S.role[0]));if(!ok.some(n=>n[0]===U.v)&&U.v!=='search')U.v='dash';
+ $('#nav').innerHTML=ok.map(n=>`<a class="${n[0]===U.v?'on':''}" tabindex="0" data-act="go" data-v="${n[0]}" data-fk="" data-fv="">${n[1]}</a>`).join('');
+ $('#role').innerHTML=Object.entries(ROLES).map(([k,v])=>`<option value="${k}"${k===S.role?' selected':''}>${v}</option>`).join('');
+ $('#bell').textContent=fa(notes().filter(n=>!S.read.includes(n.id)).length);$('#main').innerHTML=V[U.v]();charts();$('#side').classList.remove('open')}
+function go(v,fk,fv){U.v=v;U.f=fk?{[fk]:fv}:{};render();scrollTo(0,0)}
+function openForm(k,id){const c=R[k],it=(id&&by(k,id))||{};$('#m').innerHTML=`<form data-k="${k}" data-id="${id||''}"><h3>${id?'ویرایش':'ایجاد'} ${c.s}</h3>${c.f.map(([n,l,t,o])=>{const v=it[n]??(t==='number'?0:'');const i=t==='select'?`<select name="${n}">${o().map(([a,b])=>`<option value="${esc(a)}"${a==v?' selected':''}>${esc(b)}</option>`).join('')}</select>`:t==='area'?`<textarea name="${n}" rows="3">${esc(v)}</textarea>`:`<input name="${n}" type="${t}" value="${esc(v)}">`;return`<label>${l}${i}</label>`}).join('')}${k==='tasks'?`<label>افزودن نظر<input name="_c"></label><ul class="l">${(it.comments||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}<p class="err" role="alert"></p><div class="row"><button class="btn p">ذخیره</button><button type="button" class="btn" data-act="close">انصراف</button></div></form>`;$('#m').showModal()}
+function remove(k,id){const it=by(k,id);if(k==='people'&&S.d.tasks.some(t=>t.assignee===id&&!fin(t)))return toast('این فرد وظیفه باز دارد؛ ابتدا وظایف را بازتخصیص دهید.');
+ if(!confirm('این رکورد حذف شود؟'+(k==='projects'?' وظایف، اسناد و رویدادهای پروژه نیز حذف می‌شوند.':'')))return;
+ if(k==='projects'){['tasks','docs','events','contracts'].forEach(x=>S.d[x]=S.d[x].filter(r=>r.project!==id))}
+ if(k==='people'){S.d.tasks.forEach(t=>{if(t.assignee===id)t.assignee=t.dept?by('depts',t.dept).head:'p0'});S.d.depts.forEach(d=>{if(d.head===id)d.head='p0'})}
+ if(k==='tasks')S.d.tasks.forEach(t=>{if(t.dep===id)t.dep=''});
+ S.d[k]=S.d[k].filter(r=>r.id!==id);log('حذف '+R[k].s+': '+(it.title||it.name));save();render();toast('حذف شد')}
+function setStatus(id,s){const t=by('tasks',id),d=t.dep&&by('tasks',t.dep);if(d&&!fin(d)&&['در حال انجام','در انتظار بررسی','تکمیل‌شده'].includes(s)){toast('هشدار: پیش‌نیاز تکمیل نشده است.');return render()}
+ t.status=s;t.done=s==='تکمیل‌شده'?today():undefined;log('وضعیت «'+t.title+'» → '+s);save();render()}
+/* رویدادها */
+document.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;const d=a.dataset;
+ ({go:()=>go(d.v,d.fk,d.fv),menu:()=>$('#side').classList.toggle('open'),close:()=>$('#m').close(),new:()=>openForm(d.k),edit:()=>{if($('#m').open)$('#m').close();openForm(d.k,d.id)},del:()=>remove(d.k,d.id),tv:()=>{U.tv=U.tv==='board'?'table':'board';render()},
+ tog:()=>{const p=by('people',d.id);p.active=!p.active;log((p.active?'فعال‌سازی ':'غیرفعال‌سازی ')+p.name);save();render()},
+ reset:()=>{if(confirm('همه داده‌های نمایشی به حالت اولیه بازگردانده شود؟')){S={v:1,d:seed(),role:'senior',read:[]};U={v:'dash',f:{},tv:'board',chat:[],sort:'due'};save();render();toast('داده‌ها بازنشانی شد')}},
+ readall:()=>{S.read=notes().map(n=>n.id);save();render()},unr:()=>{U.unread=!U.unread;render()},
+ note:()=>{if(!S.read.includes(d.id))S.read.push(d.id);save();U.v=d.k;U.f={};render();openForm(d.k,d.r)},
+ ask:()=>{answer(d.q);render()},askin:()=>{const v=$('#aq').value.trim();if(v){answer(v);render()}}})[d.act]?.()});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset?.act&&e.target.tagName==='A'||e.key==='Enter'&&e.target.classList.contains('kpi'))e.target.click();if(e.key==='Enter'&&e.target.id==='aq')document.querySelector('[data-act=askin]').click()});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.st)return setStatus(t.dataset.st,t.value);if(t.dataset.sort!==undefined){U.sort=t.value;render()}});
+document.addEventListener('input',e=>{const t=e.target,f=t.dataset.f;if(!f)return;U.f[f]=t.value;render();const n=document.querySelector(`[data-f="${f}"]`);if(n&&t.type==='search'){n.focus();n.setSelectionRange(n.value.length,n.value.length)}});
+$('#role').addEventListener('change',e=>{S.role=e.target.value;U.f={};save();render();toast('نقش نمایشی: '+ROLES[S.role])});
+$('#gs').addEventListener('input',e=>{U.s=e.target.value.trim();U.v='search';render()});
+document.addEventListener('submit',e=>{const f=e.target;e.preventDefault();const k=f.dataset.k,id=f.dataset.id,c=R[k],fd=new FormData(f),o={},er=m=>{f.querySelector('.err').textContent=m};
+ for(const [n,l,t,,opt] of c.f){let v=String(fd.get(n)||'').trim();if(!v&&!opt)return er('«'+l+'» الزامی است.');if(t==='number'){v=Number(v);if(isNaN(v)||v<0)return er('«'+l+'» باید عدد نامنفی باشد.')}o[n]=v}
+ const m=c.val&&c.val(o,id);if(m)return er(m);let it;
+ if(id){it=by(k,id);Object.assign(it,o)}else{it={id:k[0]+Date.now().toString(36),...c.def,...o};if(k==='tasks'){it.comments=[];it.creator=me()?me().id:'p0'}S.d[k].push(it)}
+ if(k==='tasks'){const cm=String(fd.get('_c')||'').trim();if(cm)it.comments.push(cm);it.done=it.status==='تکمیل‌شده'?(it.done||today()):undefined}
+ log((id?'ویرایش ':'ایجاد ')+c.s+': '+(it.title||it.name||it.id));save();$('#m').close();render();toast('ذخیره شد')});
+render();
+
+</script>
+</body></html>
